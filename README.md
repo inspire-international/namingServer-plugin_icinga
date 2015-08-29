@@ -8,19 +8,16 @@ Software: Docker
 # Preparation
 
 1) On your HostOS, issue the following git command to create the clone.
-
 ```sh
     $git clone https://github.com/inspire-international/namingServer-plugin_icinga.git
 ```
 
 2) cd to namingServer-plugin_icinga directory and kick the build.sh.
-
 ```sh
     $./build.sh 
 ```
 
 3) kick the run.sh to create & start the container.
-
 ```sh
     $./run.sh 
 ```
@@ -28,25 +25,14 @@ Software: Docker
 4) stop the container.
 
 
-
 ```sh
-
-    $./stop.sh
-
+    $./stop.sh 
 ```
 
-
-
 5) From 2nd time, use start.sh to start the container.
-
-
-
 ```sh
-
-    $./start.sh
-
-``
-`
+    $./start.sh 
+```
 
 
 # Acccess to Icinga
