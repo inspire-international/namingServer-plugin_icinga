@@ -19,9 +19,9 @@ sudo cp -f ./conf/services.conf /tmp
 
 if [ -z "$SYSLOGIP" ];
 then
-    sudo docker run --name $CONTAINER_NAME --privileged -i -t -d -p 80:80 -p 39001:39001 -p 8080:8080 -v /etc/localtime:/etc/localtime:ro -v /tmp/commands.conf:/etc/icinga2/conf.d/commands.conf -v /tmp/services.conf:/etc/icinga2/conf.d/services.conf -e "GRADLE_HOME=$GRADLE_HOME" -e "ODEDIR=$ODEDIR" $IMAGE_NAME /sbin/init
+    sudo docker run --name $CONTAINER_NAME --privileged -i -t -d -p 80:80 -p 39001:39001 -p 8080:8080 -v /tmp/commands.conf:/etc/icinga2/conf.d/commands.conf -v /tmp/services.conf:/etc/icinga2/conf.d/services.conf -e "GRADLE_HOME=$GRADLE_HOME" -e "ODEDIR=$ODEDIR" $IMAGE_NAME /sbin/init
 else
-    sudo docker run --name $CONTAINER_NAME --privileged -i -t -d -p 80:80 -p 39001:39001 -p 8080:8080 -v /etc/localtime:/etc/localtime:ro -v /tmp/commands.conf:/etc/icinga2/conf.d/commands.conf -v /tmp/services.conf:/etc/icinga2/conf.d/services.conf -e "GRADLE_HOME=$GRADLE_HOME" -e "ODEDIR=$ODEDIR" $IMAGE_NAME /sbin/init
+    sudo docker run --name $CONTAINER_NAME --privileged -i -t -d -p 80:80 -p 39001:39001 -p 8080:8080 -v /tmp/commands.conf:/etc/icinga2/conf.d/commands.conf -v /tmp/services.conf:/etc/icinga2/conf.d/services.conf -e "GRADLE_HOME=$GRADLE_HOME" -e "ODEDIR=$ODEDIR" -e "SYSLOGIP=$SYSLOGIP" $IMAGE_NAME /sbin/init
 fi
 sudo docker exec $CONTAINER_NAME /bin/bash -c "broker -bg" &
 sudo docker exec $CONTAINER_NAME /bin/bash -c "/opt/nextra/bin/spring-boot-broklist.sh" &

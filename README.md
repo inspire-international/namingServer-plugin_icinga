@@ -45,7 +45,7 @@ and type
 
 > Password: icinga
 
-Please check services registered to Nextra Naming Server
+Please check services registered to Nextra Naming Server.
 
 
 # Handling services
