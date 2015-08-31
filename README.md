@@ -1,8 +1,14 @@
 # namingServer-plugin_icinga
 Icinga on Docker container empowered with naming server plugin through which any registered network processes are to be monitored.
 
+
 # Prerequisite
 Software: Docker
+
+
+# Demo video on YouTube(158 secs)
+
+[![YouTube](https://i.ytimg.com/vi/wLoUvtex1kY/hqdefault.jpg)](https://youtu.be/wLoUvtex1kY)
 
 
 # Preparation
@@ -72,11 +78,6 @@ For instance, type as following on your host machine.
 ```sh
 $ sudo docker exec icinga_broker /bin/bash -c "broklist -del localhost 39001 httpd+www.example.com+80"
 ```
-
-
-# 
-
-[![YouTube](https://i.ytimg.com/vi/wLoUvtex1kY/hqdefault.jpg)](https://youtu.be/wLoUvtex1kY)
 
 
 [Nextra](http://www.inspire-intl.com/product/product_nextra.html)
