@@ -11,7 +11,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 ENV GRADLE_HOME /opt/gradle-2.6
 
 RUN apt-get update
-RUN apt-get -qqy install --no-install-recommends vim gcc g++ make unzip oracle-java8-installer && apt-get clean
+RUN apt-get -qqy install --no-install-recommends vim gcc g++ make unzip oracle-java8-installer parallel && apt-get clean
 
 # Download and deploy gradle to /opt/gradle-2.6
 RUN wget https://services.gradle.org/distributions/gradle-2.6-bin.zip -O /tmp/gradle-2.6-bin.zip

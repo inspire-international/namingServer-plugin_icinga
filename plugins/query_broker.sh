@@ -45,19 +45,18 @@ then
     else
         for index in ${!broklistServices[@]};
         do
+            ctr=$index
             if [ $(($index % 3)) -eq 0 ];
             then
                 serviceName="${broklistServices[$index]}"
                 serviceIp="${broklistServices[$index+1]}"
                 servicePort="${broklistServices[$index+2]}"
-                command="/usr/lib/nagios/plugins/icingaBroklistPing.sh $serviceName $serviceIp $servicePort"
-                $command >> /tmp/_out &
+                commands[$ctr]="/usr/lib/nagios/plugins/icingaBroklistPing.sh $serviceName $serviceIp $servicePort"
             fi
         done
-        wait
-        pingRes=$(paste -s -d ' ' /tmp/_out)
-        icingaData="$icingaData $pingRes"
-        echo -e "$icingaData"
+        op=$(SHELL=/bin/bash parallel --gnu -j 20 ::: "${commands[@]}")
+        icingaData="$icingaData $op"
+        echo -e $icingaData
     fi
 else
     icingaData="Broker not running"
