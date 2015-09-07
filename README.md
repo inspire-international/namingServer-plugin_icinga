@@ -1,5 +1,7 @@
-# namingServer-plugin_icinga
+# Naming server plugin for icinga
 Icinga on Docker container empowered with naming server plugin through which any registered network processes are to be monitored.
+
+![Naming server plugin for Icinga](http://www.inspire-intl.com/images/namingServer-plugin_icinga_monitor.jpg)
 
 
 # Prerequisite
