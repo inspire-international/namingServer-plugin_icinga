@@ -1,5 +1,5 @@
 # Naming server plugin for icinga
-Icinga on Docker container empowered with naming server plugin through which any registered network processes are to be monitored.
+Icinga on Docker container empowered with naming server plugin through which any registered network processes are to be monitored. Plus, send the log to the specified syslog server if a registered service is down.
 
 ![Naming server plugin for Icinga in action](http://www.inspire-intl.com/images/namingServer-plugin_icinga_monitor_syslog.jpg)
 
