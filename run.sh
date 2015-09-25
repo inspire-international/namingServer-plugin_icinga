@@ -23,6 +23,26 @@ then
 else
     sudo docker run --name $CONTAINER_NAME --privileged -i -t -d -p 80:80 -p 39001:39001 -p 8080:8080 -v /tmp/commands.conf:/etc/icinga2/conf.d/commands.conf -v /tmp/services.conf:/etc/icinga2/conf.d/services.conf -e "GRADLE_HOME=$GRADLE_HOME" -e "ODEDIR=$ODEDIR" -e "SYSLOGIP=$SYSLOGIP" $IMAGE_NAME /sbin/init
 fi
+sudo docker exec $CONTAINER_NAME /bin/bash -c "ln -s /etc/icingaweb2/modules/pnp4nagios /etc/icingaweb2/enabledModules/pnp4nagios" 
+sudo docker exec $CONTAINER_NAME icinga2 feature enable perfdata
+
+sleep 10
+
+sudo docker exec $CONTAINER_NAME service apache2 reload
+
+sleep 10
+
+sudo docker exec $CONTAINER_NAME service npcd start
+
+sleep 10
+
+sudo docker exec $CONTAINER_NAME service rrdcached restart
+
+sleep 10
+
+sudo docker exec $CONTAINER_NAME service icinga2 reload
+
+sleep 10 
 sudo docker exec $CONTAINER_NAME /bin/bash -c "broker -bg" &
 sudo docker exec $CONTAINER_NAME /bin/bash -c "/opt/nextra/bin/spring-boot-broklist.sh" &
 sleep 10

@@ -32,3 +32,16 @@ COPY plugins/* /usr/lib/nagios/plugins/
 RUN chmod +x /usr/lib/nagios/plugins/*.sh
 RUN chown nagios /usr/lib/nagios/plugins/*.sh
 RUN chown nagios /usr/lib/nagios/plugins/service_status_syslog.pl
+RUN mkdir /etc/icingaweb2/modules/pnp4nagios
+COPY pnpplugin/* /etc/icingaweb2/modules/pnp4nagios/
+RUN apt-get update && apt-get -y install --no-install-recommends pnp4nagios
+RUN apt-get update && apt-get -y install rrdcached
+RUN update-rc.d rrdcached defaults
+RUN mkdir -p /var/cache/rrdcached
+COPY configFiles/rrdcached /etc/default/
+COPY configFiles/process_perfdata.cfg /etc/pnp4nagios/
+COPY configFiles/config.php /etc/pnp4nagios/
+COPY configFiles/pnp4nagios.conf /etc/apache2/conf.d/
+COPY configFiles/npcd /etc/default/
+COPY configFiles/npcd.cfg /etc/pnp4nagios/
+COPY configFiles/htpasswd.users /etc/icinga2/
