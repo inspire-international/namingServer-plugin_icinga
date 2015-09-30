@@ -30,6 +30,7 @@ RUN cp /tmp/install/linux.x86_64/tcp/lib/spring-boot-broklist-6.1.jar /opt/nextr
 # Deploy icinga plugins 
 COPY plugins/* /usr/lib/nagios/plugins/
 RUN chmod +x /usr/lib/nagios/plugins/*.sh
+RUN chmod +x /usr/lib/nagios/plugins/service_status_syslog.pl
 RUN chown nagios /usr/lib/nagios/plugins/*.sh
 RUN chown nagios /usr/lib/nagios/plugins/service_status_syslog.pl
 RUN mkdir /etc/icingaweb2/modules/pnp4nagios
