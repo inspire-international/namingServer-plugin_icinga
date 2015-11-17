@@ -13,6 +13,9 @@ ENV GRADLE_HOME /opt/gradle-2.6
 RUN apt-get update
 RUN apt-get -qqy install --no-install-recommends vim gcc g++ make unzip oracle-java8-installer parallel && apt-get clean
 
+# Install pnp4nagios dependencies
+RUN apt-get -qqy install make rrdtool librrds-perl php5-cli php5-gd libapache2-mod-php5
+
 # Download and deploy gradle to /opt/gradle-2.6
 RUN wget https://services.gradle.org/distributions/gradle-2.6-bin.zip -O /tmp/gradle-2.6-bin.zip
 RUN unzip /tmp/gradle-2.6-bin.zip -d /opt
@@ -30,18 +33,17 @@ RUN cp /tmp/install/linux.x86_64/tcp/lib/spring-boot-broklist-6.1.jar /opt/nextr
 # Deploy icinga plugins 
 COPY plugins/* /usr/lib/nagios/plugins/
 RUN chmod +x /usr/lib/nagios/plugins/*.sh
+RUN chmod +x /usr/lib/nagios/plugins/service_status_syslog.pl
 RUN chown nagios /usr/lib/nagios/plugins/*.sh
 RUN chown nagios /usr/lib/nagios/plugins/service_status_syslog.pl
 RUN mkdir /etc/icingaweb2/modules/pnp4nagios
 COPY pnpplugin/* /etc/icingaweb2/modules/pnp4nagios/
-RUN apt-get update && apt-get -y install --no-install-recommends pnp4nagios
-RUN apt-get update && apt-get -y install rrdcached
-RUN update-rc.d rrdcached defaults
-RUN mkdir -p /var/cache/rrdcached
-COPY configFiles/rrdcached /etc/default/
-COPY configFiles/process_perfdata.cfg /etc/pnp4nagios/
-COPY configFiles/config.php /etc/pnp4nagios/
-COPY configFiles/pnp4nagios.conf /etc/apache2/conf.d/
-COPY configFiles/npcd /etc/default/
-COPY configFiles/npcd.cfg /etc/pnp4nagios/
-COPY configFiles/htpasswd.users /etc/icinga2/
+
+# Install pnp4nagios
+RUN wget https://docs.pnp4nagios.org/_media/dwnld/pnp4nagios-head.tar.gz -O /tmp/pnp4nagios-head.tar.gz
+RUN tar -xvzf /tmp/pnp4nagios-head.tar.gz -C /tmp
+RUN cd /tmp/pnp4nagios-head && ./configure && make all && make fullinstall
+
+# COPY config files
+COPY configFiles/pnp4nagios.conf /etc/apache2/conf-enabled/
+COPY configFiles/npcd.cfg /usr/local/pnp4nagios/etc/npcd.cfg
