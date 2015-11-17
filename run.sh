@@ -36,9 +36,9 @@ sleep 10
 
 sudo docker exec $CONTAINER_NAME service npcd start
 
-sleep 10
+#sleep 10
 
-sudo docker exec $CONTAINER_NAME service rrdcached restart
+#sudo docker exec $CONTAINER_NAME service rrdcached restart
 
 sleep 10
 sudo docker exec $CONTAINER_NAME mv /etc/icingaweb2/modules/monitoring/instances.ini /etc/icingaweb2/modules/monitoring/commandtransports.ini
