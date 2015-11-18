@@ -19,9 +19,11 @@ sleep 10
 sudo docker exec $CONTAINER_NAME service icinga2 reload
 
 sleep 10
-sudo docker exec $CONTAINER_NAME /bin/bash -c "broker -bg" &
-sudo docker exec $CONTAINER_NAME /bin/bash -c "/opt/nextra/bin/spring-boot-broklist.sh" &
+# Run broker and rpcjava 2 samples
+sudo docker exec $CONTAINER_NAME /bin/bash -c "cd /home/nextra/build/Nextra/install/linux.x86_64/samples/nextra-rest-server/java/standard && ./fly.sh" &
 
+# Run nextra-rest-server 
+sudo docker exec $CONTAINER_NAME /bin/bash -c "cd /tmp && nextra-rest-server.sh" &
 sleep 10
 
 # Add services you want to be monitored by Nextra Naming Server.

@@ -7,14 +7,14 @@ port="39001"
 # Broker server status messages
 aliveMsg="Server is alive"
 deadMsg="Server is not alive"
-isBrokerAlive=$(/usr/local/bin/broklist -ping $ip $port)
+isBrokerAlive=$(broklist -ping $ip $port)
 icingaData=""
 
 # Commented the below code due to a known issue while invoking broker within the script
 #if [ "$isBrokerAlive" == "$deadMsg" ];
 #then
-#    broker="/usr/local/bin/broker -e /tmp/tmp_broker.env -bg"
-#    #broker="/usr/local/bin/broker -bg"
+#    broker="broker -e /tmp/tmp_broker.env -bg"
+#    #broker="broker -bg"
 #    $broker
 #    #/bin/bash /usr/lib/nagios/plugins/brokerStart.sh
 #fi
@@ -22,12 +22,12 @@ if [ -f /tmp/_out ];
 then
     rm /tmp/_out
 fi
-isBrokerAlive=$(/usr/local/bin/broklist -ping $ip $port)
+isBrokerAlive=$(broklist -ping $ip $port)
 if [ "$isBrokerAlive" == "$aliveMsg" ];
 then
     #Script to register ORCA and MPAP services
     #source /usr/lib/nagios/plugins/register_services.sh
-    serviceMsg=$(/usr/local/bin/broklist $ip $port)
+    serviceMsg=$(broklist $ip $port)
     icingaData="Broker running at $ip $port\nRegistered Services\n"
     for index in ${!serviceMsg[@]};
     do
@@ -37,7 +37,7 @@ then
         fi
     done
     icingaData="$icingaData |"
-    broklistServices=($(/usr/local/bin/broklist $ip $port | awk '{$4=$5=""; print $0}'))
+    broklistServices=($(broklist $ip $port | awk '{$4=$5=""; print $0}'))
     if [[ ${!broklistServices[@]} == "" ]];
     then
         icingaData="$icingaData \n No services registered to broker"

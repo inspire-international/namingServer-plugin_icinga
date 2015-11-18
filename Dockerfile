@@ -8,27 +8,34 @@ RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" 
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
-ENV GRADLE_HOME /opt/gradle-2.6
-
 RUN apt-get update
-RUN apt-get -qqy install --no-install-recommends vim gcc g++ make unzip oracle-java8-installer parallel && apt-get clean
+RUN apt-get -qqy install --no-install-recommends vim gcc g++ ksh unzip oracle-java8-installer parallel && apt-get clean
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+RUN apt-get -qqy install --no-install-recommends ant swig && apt-get clean
 
 # Install pnp4nagios dependencies
-RUN apt-get -qqy install make rrdtool librrds-perl php5-cli php5-gd libapache2-mod-php5
+RUN apt-get -qqy install --no-install-recommends make rrdtool librrds-perl php5-cli php5-gd libapache2-mod-php5 && apt-get clean
+RUN cp /usr/bin/make /usr/bin/gmake
 
-# Download and deploy gradle to /opt/gradle-2.6
-RUN wget https://services.gradle.org/distributions/gradle-2.6-bin.zip -O /tmp/gradle-2.6-bin.zip
-RUN unzip /tmp/gradle-2.6-bin.zip -d /opt
+# Download and deploy gradle to /opt/gradle-2.8
+RUN wget --no-check-certificate https://services.gradle.org/distributions/gradle-2.8-bin.zip -O /tmp/gradle-2.8-bin.zip
+RUN unzip /tmp/gradle-2.8-bin.zip -d /opt
+ENV GRADLE_HOME /opt/gradle-2.8
 
-# Build Nextra
-RUN wget http://www.inspire-intl.com/product/nextra/download/broker-6.1-0.1.tgz -O /tmp/broker-6.1-0.1.tgz
-RUN tar xvfz /tmp/broker-6.1-0.1.tgz -C /tmp
-RUN cd /tmp && ./build.sh
-RUN cp /tmp/install/linux.x86_64/tcp/bin/broker /usr/local/bin
-RUN cp /tmp/install/linux.x86_64/tcp/bin/broklist /usr/local/bin
-RUN mkdir -p /opt/nextra/bin && mkdir -p /opt/nextra/lib
-RUN cp /tmp/install/linux.x86_64/tcp/bin/spring-boot-broklist.sh /opt/nextra/bin
-RUN cp /tmp/install/linux.x86_64/tcp/lib/spring-boot-broklist-6.1.jar /opt/nextra/lib
+# Nextra65
+RUN wget http://www.inspire-intl.com/product/nextra/download/nextra-65.tgz -O /tmp/nextra-65.tgz
+RUN mkdir -p /home/nextra/build
+RUN tar xvfz /tmp/nextra-65.tgz -C /home/nextra/build
+ENV MODULE_BUILD_TYPE R
+ENV ODEDIR /home/nextra/build/Nextra/src/../install/linux.x86_64/tcp
+ENV PATH "$PATH:$ODEDIR/bin:$ODEDIR/../cmn/bin"
+ENV LD_LIBRARY_PATH "$JAVA_HOME/jre/lib/amd64/server:$ODEDIR/lib"
+RUN cd /home/nextra/build/Nextra/src && ./build.sh all
+RUN cd /home/nextra/build/Nextra/src && ./build.sh install
+RUN cd $ODEDIR/../samples/nextra-rest-server/java/standard && ./build.sh
+RUN mkdir /tmp/options
+COPY options/* /tmp/options/
 
 # Deploy icinga plugins 
 COPY plugins/* /usr/lib/nagios/plugins/

@@ -1,0 +1,38 @@
+[uuid(00.00.00.00.00.00.00.04) version(1.1)]
+interface testInterface {
+
+    void fChaNStr(
+            [in]    char    sIn[],
+            [out]  char    sOut[]
+    );
+
+    void fChaFStr(
+            [in]    char    sIn[10],
+            [out]  char    sOut[10]
+    );
+
+    void fChaNArr(
+        [in]    char    sArrIn[][],
+        [out]  char    sArrOut[][]
+    );
+
+    void fChaFArr(
+            [in]    char    sArrIn[10][10],
+            [out]  char    sArrOut[10][10]
+    );
+
+    int fInt(
+            [in]    int     nIn,
+            [out]  int     nOut
+    );
+
+    void fIntFArr(
+            [in]    int     nArrIn[10],
+            [out]  int     nArrOut[10]
+    );
+
+    long fLong(
+            [in]    long    lIn,
+            [out]   long    lOut
+    );
+}

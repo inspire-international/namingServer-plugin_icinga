@@ -1,0 +1,58 @@
+[uuid(00.00.00.00.00.00.00.04) version(1.1)]
+interface testInterface2 {
+
+    void fChaNStr2 (
+            [in]    char    sIn[],
+            [in]    char    sIn2[],
+            [in]    char    sIn3[],
+            [out]  char    sOut[],
+            [out]  char    sOut2[],
+            [out]  char    sOu3[]
+    );
+
+    void fChaFStr2 (
+            [in]    char    sIn[10],
+            [in]    char    sIn2[10],
+            [in]    char    sIn3[10],
+            [out]  char    sOut[10],
+            [out]  char    sOut2[10],
+            [out]  char    sOu3[10]
+    );
+
+    void fChaNArr2 (
+        [in]    char    sArrIn[][],
+        [in]    char    sArrIn2[][],
+        [in]    char    sArrIn3[][],
+        [out]  char    sArrOut[][],
+        [out]  char    sArrOut2[][],
+        [out]  char    sArrOu3[][]
+    );
+
+    void fChaFArr2 (
+            [in]    char    sArrIn[10][10],
+            [in]    char    sArrIn2[10][10],
+            [in]    char    sArrIn3[10][10],
+            [out]  char    sArrOut[10][10],
+            [out]  char    sArrOut2[10][10],
+            [out]  char    sArrOut3[10][10]
+    );
+
+    int fInt2 (
+            [in]    int     nIn,
+            [in]    int     nIn2,
+            [in]    int     nIn3,
+            [out]  int     nOut,
+            [out]  int     nOut2,
+            [out]  int     nOut3
+    );
+
+    void fIntFArr2(
+            [in]    int     nArrIn[10],
+            [in]    int     nArrIn2[10],
+            [in]    int     nArrIn3[10],
+            [out]  int     nArrOut[10],
+            [out]  int     nArrOut2[10],
+            [out]  int     nArrOut3[10]
+    );
+
+}
