@@ -3,7 +3,7 @@ serviceName=$1
 serviceIp=$2
 servicePort=$3
 deadMsg="Server is not alive"
-connect=$(broklist -ping $serviceIp $servicePort)
+connect=$($ODEDIR/bin/broklist -ping $serviceIp $servicePort)
 #Message format used by Icinga : 'Service Name IP:Port'=Value;Warning Value;Critical Value;Min Value;Max Value
 if [[ "$connect" == "$deadMsg" ]];
 then

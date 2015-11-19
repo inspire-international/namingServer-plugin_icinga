@@ -29,7 +29,7 @@ sudo docker exec $CONTAINER_NAME icinga2 feature enable perfdata
 
 sleep 10
 
-sudo docker exec $CONTAINER_NAME service apache2 reload
+sudo docker exec $CONTAINER_NAME service apache2 start
 
 sleep 10
 
