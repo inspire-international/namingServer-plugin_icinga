@@ -4,7 +4,7 @@ export CONTAINER_NAME=icinga_broker
 
 sudo docker start $CONTAINER_NAME
 
-sudo docker exec $CONTAINER_NAME service apache2 reload
+sudo docker exec $CONTAINER_NAME service apache2 restart
 
 sleep 10
 
@@ -12,7 +12,7 @@ sudo docker exec $CONTAINER_NAME service npcd start
 
 sleep 10
 
-sudo docker exec $CONTAINER_NAME service rrdcached restart
+#sudo docker exec $CONTAINER_NAME service rrdcached restart
 
 sleep 10
 
