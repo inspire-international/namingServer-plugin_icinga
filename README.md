@@ -58,8 +58,8 @@ Please check services registered to Nextra Naming Server.
 
 # Handling services
 
-To see which services are registered to the naming server, type as following.
-http://localhost:8080/broklist
+Access to http://localhost:8080 to see which services are registered to the naming server. Then, click through api => /api/broker on Swagger.
+
 
 ### Adding service
 
