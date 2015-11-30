@@ -3,6 +3,8 @@ Icinga on Docker container empowered with naming server plugin through which any
 
 ![Naming server plugin for Icinga in action](http://www.inspire-intl.com/images/namingServer-plugin_icinga_monitor_syslog_broklist.jpg)
 
+[Distributed Computing in the Cloud Age](http://www.inspire-intl.com/product/nextra/doc/namingServerSolution_nextra-rest-server_en.pdf)
+
 
 # Prerequisite
 Software: Docker
