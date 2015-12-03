@@ -54,3 +54,4 @@ RUN cd /tmp/pnp4nagios-head && ./configure && make all && make fullinstall
 # COPY config files
 COPY configFiles/pnp4nagios.conf /etc/apache2/conf-enabled/
 COPY configFiles/npcd.cfg /usr/local/pnp4nagios/etc/npcd.cfg
+COPY configFiles/graph_content.php /usr/local/pnp4nagios/share/application/views/graph_content.php
