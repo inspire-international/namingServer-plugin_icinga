@@ -9,8 +9,9 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
 RUN apt-get update
-RUN apt-get -qqy install --no-install-recommends vim gcc g++ ksh unzip oracle-java8-installer parallel && apt-get clean
+RUN apt-get -qqy install --no-install-recommends vim gcc g++ ksh unzip parallel && apt-get clean
 
+RUN apt-get -qqy install --no-install-recommends oracle-java8-installer && apt-get clean
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 RUN apt-get -qqy install --no-install-recommends ant swig && apt-get clean
 
