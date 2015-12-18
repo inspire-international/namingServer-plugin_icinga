@@ -84,6 +84,6 @@ $ sudo docker exec icinga_broker /bin/bash -c "broklist -del localhost 39001 htt
 ```
 
 
-[Nextra Naming Server](http://inspire-intl.com/product/product_nextraJ.html#icinga)
+[Nextra Naming Server](http://inspire-intl.com/product/product_nextra.html#icinga)
 
 #### Copyright (C) 1998 - 2015  Inspire International Inc.
