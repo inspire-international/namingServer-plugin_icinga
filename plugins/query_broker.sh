@@ -7,6 +7,12 @@ port="39001"
 # Broker server status messages
 aliveMsg="Server is alive"
 deadMsg="Server is not alive"
+
+if [[ "`uname -m`" == "arm"* ]]; then
+    export ODEDIR=/home/nextra/build/Nextra/src/../install/linux/tcp
+    export HOME=/tmp
+fi
+
 isBrokerAlive=$($ODEDIR/bin/broklist -ping $ip $port)
 icingaData=""
 

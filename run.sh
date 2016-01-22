@@ -10,8 +10,21 @@ export SYSLOGIP=$syslog_ip
 export IMAGE_NAME=debian_icinga_broker
 export CONTAINER_NAME=icinga_broker
 
+# If you do not have the $CONTAINER_NAME, you get an error, then please ignore.
 sudo docker rm $CONTAINER_NAME 
 
+if [ -f /tmp/commands.conf ]
+then
+    sudo rm -f /tmp/commands.conf
+fi
+if [ -f /tmp/services.conf ]
+then
+    sudo rm -f /tmp/services.conf
+fi
+if [ -f /tmp/groups.conf ]
+then
+    sudo rm -f /tmp/groups.conf
+fi
 sudo cp -f ./conf/commands.conf /tmp
 sudo cp -f ./conf/services.conf /tmp
 sudo cp -f ./conf/groups.conf /tmp

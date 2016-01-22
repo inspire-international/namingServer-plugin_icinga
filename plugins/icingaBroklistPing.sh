@@ -3,6 +3,11 @@ serviceName=$1
 serviceIp=$2
 servicePort=$3
 deadMsg="Server is not alive"
+
+if [[ "`uname -m`" == "arm"* ]]; then
+    export ODEDIR=/home/nextra/build/Nextra/src/../install/linux/tcp
+fi
+
 connect=$($ODEDIR/bin/broklist -ping $serviceIp $servicePort)
 #Message format used by Icinga : 'Service Name IP:Port'=Value;Warning Value;Critical Value;Min Value;Max Value
 if [[ "$connect" == "$deadMsg" ]];

@@ -3,7 +3,7 @@ Icinga on Docker container empowered with naming server plugin through which any
 
 ![Naming server plugin for Icinga in action](http://www.inspire-intl.com/images/namingServer_IoT.jpg)
 
-[Distributed Computing in the Cloud Age](http://www.inspire-intl.com/product/nextra/doc/namingServerSolution_nextra-rest-server_en.pdf)
+[Asset tracking & Motoring solution](http://www.inspire-intl.com/product/nextra/doc/monitoring_en.pdf)
 
 
 # Prerequisite
@@ -86,4 +86,4 @@ $ sudo docker exec icinga_broker /bin/bash -c "broklist -del localhost 39001 htt
 
 [Nextra Naming Server](http://inspire-intl.com/product/product_nextra.html#icinga)
 
-#### Copyright (C) 1998 - 2015  Inspire International Inc.
+#### Copyright (C) 1998 - 2016  Inspire International Inc.
